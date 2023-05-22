@@ -1,8 +1,8 @@
 xxd -i funnyvoice.zip > archivo_binario_b.h
 
-gcc -c zlib-1.2.13/*.c
-gcc -c zlib-1.2.13/contrib/minizip/*.c
-g++ -DUNICODE -Izlib-1.2.13 -Izlib-1.2.13/contrib/minizip -c asd.cpp
-g++ -o ejecutable.exe asd.o zzlib/*.o zzzminizip/*.o
+gcc -c zlib/*.c
+gcc -c minizip/*.c
+g++ -DUNICODE -Izlib -Iminizip -c main.cpp
+g++ -o ejecutable.exe main.o zlib/*.o minizip/*.o
 
-cls & g++ -DUNICODE -Izlib-1.2.13 -Izlib-1.2.13/contrib/minizip -c asd.cpp & g++ -o ejecutable.exe asd.o zzlib/*.o zzzminizip/*.o & ejecutable.exe
+cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe main.o zlib/*.o minizip/*.o & ejecutable.exe

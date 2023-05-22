@@ -4,8 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/zlib-1.2.13",
-                "${workspaceFolder}/zlib-1.2.13/contrib/minizip"
+                "${workspaceFolder}/zlib",
+                "${workspaceFolder}/minizip"
             ],
             "defines": [
                 "_DEBUG",
