@@ -1,8 +1,10 @@
-xxd -i funnyvoice.zip > archivo_binario_b.h
+xxd -i funnyvoice.zip > archivo_binario_b.h (metodo antiguo)
+
+windres resources.rc -O coff -o resources.res
 
 gcc -c zlib/*.c
 gcc -c minizip/*.c
 g++ -DUNICODE -Izlib -Iminizip -c main.cpp
-g++ -o ejecutable.exe main.o zlib/*.o minizip/*.o
+g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o
 
-cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe main.o zlib/*.o minizip/*.o & ejecutable.exe
+cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o & ejecutable.exe
