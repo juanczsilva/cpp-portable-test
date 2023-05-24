@@ -11,14 +11,11 @@ gcc -c minizip/*.c
 ## compilar c++
 g++ -DUNICODE -Izlib -Iminizip -c main.cpp
 
-## debug consola
+## generar ejecutable debug con consola
 g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o
 
-## release no consola
-g++ -o ejecutable.exe -mwindows resources.res main.o zlib/*.o minizip/*.o
+## generar ejecutable release no consola
+g++ -o ejecutable.exe -mwindows -static-libgcc -static-libstdc++ -static -lwinpthread resources.res main.o zlib/*.o minizip/*.o
 
-## limpiar consola, compilar c++, generar ejecutable debug consola, ejecutar
+## limpiar terminal, compilar c++, generar ejecutable debug con consola, ejecutar
 cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o & ejecutable.exe
-
-## limpiar consola, compilar c++, generar ejecutable release no consola, ejecutar
-cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe -mwindows resources.res main.o zlib/*.o minizip/*.o & ejecutable.exe
