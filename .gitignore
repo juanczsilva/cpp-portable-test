@@ -1,2 +1,5 @@
+*.o
+*.res
+icon.ico
 file.zip
-ejecutable.exe
+file.exe

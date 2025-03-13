@@ -4,7 +4,6 @@
 #include <filesystem>
 #include "zip.h"
 #include "unzip.h"
-// #include "old_archivo_binario.h" (metodo antiguo)
 
 int main(int argc, char const *argv[]) {
     std::cout << "------------- CPP-PORTABLE-TEST -------------" << std::endl;

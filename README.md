@@ -1,21 +1,18 @@
-## convertir binario a bytes (metodo antiguo)
-xxd -i funnyvoice.zip > archivo_binario_b.h
-
-## generar archivo de recursos
+## build resources
 windres resources.rc -O coff -o resources.res
 
-## compilar librerias c
-gcc -c zlib/*.c
-gcc -c minizip/*.c
+## compile c libs
+gcc -c libs/zlib/*.c
+gcc -c libs/minizip/*.c
 
-## compilar c++
+## compile c++ main
 g++ -DUNICODE -Izlib -Iminizip -c main.cpp
 
-## generar ejecutable debug con consola
-g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o
+## build exe debug with console
+g++ -o file.exe resources.res main.o libs/zlib/*.o libs/minizip/*.o
 
-## generar ejecutable release no consola
-g++ -o ejecutable.exe -mwindows -static-libgcc -static-libstdc++ -static -lwinpthread resources.res main.o zlib/*.o minizip/*.o
+## build exe release no console
+g++ -o file.exe -mwindows -static-libgcc -static-libstdc++ -static -lwinpthread resources.res main.o libs/zlib/*.o libs/minizip/*.o
 
-## limpiar terminal, compilar c++, generar ejecutable debug con consola, ejecutar
-cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o ejecutable.exe resources.res main.o zlib/*.o minizip/*.o & ejecutable.exe
+## clear, compile main, build exe debug with console, run
+cls & g++ -DUNICODE -Izlib -Iminizip -c main.cpp & g++ -o file.exe resources.res main.o libs/zlib/*.o libs/minizip/*.o & file.exe
