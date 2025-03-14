@@ -5,12 +5,16 @@
 #include "zip.h"
 #include "unzip.h"
 
+#ifndef NAME
+#define NAME "portable"
+#endif
+
 int main(int argc, char const *argv[]) {
     std::cout << "------------- CPP-PORTABLE-TEST -------------" << std::endl;
     std::cout << "Ruta TEMP: " + std::filesystem::temp_directory_path().string() << std::endl;
 
-    std::string nombreArchivo = "portable_temp.zip";
-    std::string rutaCompleta = std::filesystem::temp_directory_path().string() + "portable_temp_folder";
+    std::string nombreArchivo = std::string(NAME) + "_temp.zip";
+    std::string rutaCompleta = std::filesystem::temp_directory_path().string() + std::string(NAME) + "_temp_folder";
     std::string targetExtension = ".exe";
     std::filesystem::path targetFile;
 
@@ -23,9 +27,12 @@ int main(int argc, char const *argv[]) {
     } else {
         std::cout << "La carpeta ya existe: " << rutaCompleta << std::endl;
         for (const auto& entry : std::filesystem::directory_iterator(rutaCompleta)) {
-            if (entry.path().extension() == targetExtension) {
+            if (entry.path().filename() == (std::string(NAME) + targetExtension)) {
                 targetFile = entry.path();
-                break;  // Detiene la busqueda despues de encontrar el primer archivo
+                break;
+            }
+            if (targetFile.empty() && entry.path().extension() == targetExtension) {
+                targetFile = entry.path();
             }
         }
         if (!targetFile.empty()) {
@@ -50,13 +57,12 @@ int main(int argc, char const *argv[]) {
             HGLOBAL hLoadedResource = LoadResource(hModule, hResource);
             if (hLoadedResource != NULL) {
                 const char* pData = static_cast<const char*>(LockResource(hLoadedResource));
-                // Copia los datos del arreglo al archivo
-                // file.write(reinterpret_cast<const char*>(funnyvoice_zip), funnyvoice_zip_len);
                 file.write(pData, dwSize);
                 file.close();
                 FreeResource(hLoadedResource);
             }
         }
+
         // Realiza operaciones con el archivo copiado
         ///////////////////////////////////
         const char* zipFilePath = zipFilePathCompleto.c_str();
@@ -136,9 +142,12 @@ int main(int argc, char const *argv[]) {
         ///////////////////////////////////
 
         for (const auto& entry : std::filesystem::directory_iterator(destinationFolder)) {
-            if (entry.path().extension() == targetExtension) {
+            if (entry.path().filename() == (std::string(NAME) + targetExtension)) {
                 targetFile = entry.path();
-                break;  // Detiene la busqueda despues de encontrar el primer archivo
+                break;
+            }
+            if (targetFile.empty() && entry.path().extension() == targetExtension) {
+                targetFile = entry.path();
             }
         }
         if (!targetFile.empty()) {

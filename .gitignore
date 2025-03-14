@@ -1,5 +1,5 @@
 *.o
 *.res
+*.exe
 icon.ico
 file.zip
-file.exe
